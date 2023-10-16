@@ -1,5 +1,5 @@
 # Usa una imagen base de Node.js
-FROM node:14
+FROM node:18
 
 # Establece el directorio de trabajo dentro del contenedor
 WORKDIR /app
@@ -12,7 +12,7 @@ COPY dist/ ./dist/
 RUN npm install --only=production
 
 # Exponer el puerto en el que se ejecutará la aplicación
-EXPOSE 3000
+EXPOSE 4000
 
 # Comando para iniciar la aplicación
 CMD ["node", "dist/main.js"]

@@ -1,7 +1,4 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryColumn } from 'typeorm';
-
-import { ProductInventoryTechnical } from 'src/apps/inventory/infrastructure/entities/ProductInventoryTechnical.entity';
-import { Sales } from 'src/apps/inventory/infrastructure/entities/Sales.entity';
+import { Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm';
 
 import { Role } from './role.entity';
 
@@ -33,10 +30,4 @@ export class User {
     eager: true,
   })
   role: Role;
-
-  @OneToMany(() => ProductInventoryTechnical, (product) => product.color)
-  productsTechnical: ProductInventoryTechnical[];
-
-  @OneToMany(() => Sales, (product) => product.user)
-  sales: Sales[];
 }
