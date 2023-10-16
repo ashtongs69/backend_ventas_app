@@ -60,10 +60,10 @@ export class PlagueUpdatorUseCase implements IUseCase<IInput, void> {
         data.recomendations,
       );
     }
-
     Object.assign(item, {
       ...data,
     });
+    console.log(item);
 
     await this.plagueRepository.save(item);
   }

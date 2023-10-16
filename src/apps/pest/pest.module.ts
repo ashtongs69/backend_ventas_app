@@ -8,6 +8,7 @@ import { FrecuencyCreatorUseCase } from './application/frecuency/creator';
 import { FrecuencyFinderAllUseCase } from './application/frecuency/finder-all';
 import { FrecuencyUpdatorUseCase } from './application/frecuency/updator';
 import { PlagueCreatorUseCase } from './application/plague/creator';
+import { PlagueCreatorFollowUpUseCase } from './application/plague/creator-followup';
 import { PlagueFinderAllUseCase } from './application/plague/finder-all';
 import { PlagueUpdatorUseCase } from './application/plague/updator';
 import { RecomendationsCreatorUseCase } from './application/recomendations/creator';
@@ -79,6 +80,7 @@ import { TypeServiceRepository } from './infrastructure/repositories/type-servic
     PlagueCreatorUseCase,
     PlagueFinderAllUseCase,
     PlagueUpdatorUseCase,
+    PlagueCreatorFollowUpUseCase,
 
     //Repositories
     ClientRepository,

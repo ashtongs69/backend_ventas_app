@@ -12,6 +12,10 @@ import { Frecuency } from './frecuency.entity';
 import { Recomendations } from './recomendations.entity';
 import { TypePlague } from './type-plague.entity';
 import { TypeService } from './type-service.entity';
+import {
+  EStatusPlague,
+  ETypePlague,
+} from '../../domain/entities/plague-entity';
 
 @Entity()
 export class Plague {
@@ -26,6 +30,12 @@ export class Plague {
 
   @Column({ nullable: false, type: 'text' })
   observations: string;
+
+  @Column({ enum: ETypePlague, nullable: false })
+  type: ETypePlague;
+
+  @Column({ enum: EStatusPlague, nullable: false })
+  status: EStatusPlague;
 
   @ManyToOne(() => Client, (client) => client.plague, { eager: true })
   client: Client;

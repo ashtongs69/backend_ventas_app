@@ -65,7 +65,6 @@ export class ProductInventoryPhoneCreatorUseCase
     const typeDamage = await this.typeDamageRepository.findManyById(
       data.typeDamage,
     );
-    console.log(typeDamage);
     const entity = new ProductInventoryPhoneEntity({
       id: generateUUID(),
       model,

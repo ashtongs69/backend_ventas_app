@@ -3,7 +3,10 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { IUseCase } from 'src/global';
 import { generateUUID } from 'src/shared/utils/generateUUID';
 
-import { PlagueEntity } from '../../domain/entities/plague-entity';
+import {
+  EStatusPlague,
+  PlagueEntity,
+} from '../../domain/entities/plague-entity';
 import { CreatePlagueDTO } from '../../infrastructure/dto/plague.dto';
 import { ClientRepository } from '../../infrastructure/repositories/client-repository';
 import { FrecuencyRepository } from '../../infrastructure/repositories/frecuency-repository';
@@ -53,11 +56,10 @@ export class PlagueCreatorUseCase
       client,
       typePlague,
       typeService,
+      status: EStatusPlague.NO_REALIZED,
       frecuency,
       recomendations,
     });
-
-    console.log(values);
 
     return await this.plagueRepository.save(values);
   }

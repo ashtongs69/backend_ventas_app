@@ -3,6 +3,7 @@ import {
   IsArray,
   IsBoolean,
   IsDateString,
+  IsEnum,
   IsNotEmpty,
   IsNumberString,
   IsOptional,
@@ -10,6 +11,11 @@ import {
 } from 'class-validator';
 
 import { generateUUID } from 'src/shared/utils/generateUUID';
+
+import {
+  EStatusPlague,
+  ETypePlague,
+} from '../../domain/entities/plague-entity';
 
 export class CreatePlagueDTO {
   @IsDateString()
@@ -29,12 +35,20 @@ export class CreatePlagueDTO {
   cost: number;
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   @ApiProperty({
     required: true,
     example: '700',
   })
   observations: string;
+
+  @IsEnum(ETypePlague)
+  @ApiProperty({
+    required: true,
+    example: ETypePlague.INITIAL,
+    enum: ETypePlague,
+  })
+  type: ETypePlague;
 
   @IsString()
   @IsNotEmpty()
@@ -93,4 +107,39 @@ export class CreatePlagueDTO {
   dateFollowUp?: Date;
 }
 
-export class UpdatePlagueDTO extends PartialType(CreatePlagueDTO) {}
+export class CreateFollowUpDTO {
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty({
+    required: true,
+    example: '1223456789',
+  })
+  id: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty({
+    required: true,
+    example: 'Observaciones ....',
+  })
+  observations: string;
+
+  @IsDateString()
+  @IsNotEmpty()
+  @ApiProperty({
+    required: true,
+    example: new Date(),
+  })
+  date: Date;
+}
+
+export class UpdatePlagueDTO extends PartialType(CreatePlagueDTO) {
+  @IsEnum(EStatusPlague)
+  @IsOptional()
+  @ApiProperty({
+    required: false,
+    example: EStatusPlague.NO_REALIZED,
+    enum: EStatusPlague,
+  })
+  status?: EStatusPlague;
+}
