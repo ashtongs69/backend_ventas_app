@@ -19,6 +19,7 @@ export interface IEnvConfig {
   SENDGRID_API_KEY: string;
   RABBIT_MQ_URI: string;
   TZ: string;
+  CORS: string;
 }
 
 export const joiSchemaEnv = Joi.object<IEnvConfig>({
@@ -34,6 +35,7 @@ export const joiSchemaEnv = Joi.object<IEnvConfig>({
   SENDGRID_API_KEY: Joi.string().required(),
   RABBIT_MQ_URI: Joi.string().uri().required(),
   TZ: Joi.string().required(),
+  CORS: Joi.string().required(),
 });
 
 export const config = registerAs('config', () => {
@@ -50,5 +52,6 @@ export const config = registerAs('config', () => {
     SENDGRID_API_KEY: process.env.SENDGRID_API_KEY,
     RABBIT_MQ_URI: process.env.RABBIT_MQ_URI,
     TZ: process.env.TZ,
+    CORS: process.env.CORS,
   };
 });

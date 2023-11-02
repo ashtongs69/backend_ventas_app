@@ -6,7 +6,13 @@ import { AppModule } from './app.module';
 
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule, {
-    cors: { origin: ['http://localhost:5173', 'http://localhost:3000'] },
+    cors: {
+      origin: [
+        'http://localhost:5173',
+        'http://localhost:3000',
+        process.env.CORS,
+      ],
+    },
   });
 
   app.useGlobalPipes(
