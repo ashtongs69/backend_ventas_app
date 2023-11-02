@@ -29,7 +29,6 @@ export class PlagueCreatorUseCase
   ) {}
   async execute(data: CreatePlagueDTO): Promise<PlagueEntity> {
     const client = await this.clientRepository.findOne({ id: data.client });
-
     if (!client) {
       throw new NotFoundException('No se encontro cliente');
     }
