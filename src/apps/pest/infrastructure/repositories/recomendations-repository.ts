@@ -1,3 +1,4 @@
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { In, Repository } from 'typeorm';
 
@@ -5,6 +6,7 @@ import { RecomendationsEntity } from '../../domain/entities/recomendations-entit
 import { IRecomendationsRepository } from '../../domain/service/recomendations-entity';
 import { Recomendations } from '../models/recomendations.entity';
 
+@Injectable()
 export class RecomendationsRepository implements IRecomendationsRepository {
   constructor(
     @InjectRepository(Recomendations)

@@ -3,10 +3,11 @@ import { ConfigModule } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { HealthCheck } from './apps/health-check/health-check.module';
+import { AppController } from './app.controller';
 import { PestModule } from './apps/pest/pest.module';
 import { UserModule } from './apps/user/user.module';
 import { IEnvConfig, config, joiSchemaEnv } from './config';
+import { PrometheusService } from './shared/prom-client.service';
 
 export const isDev = process.env.NODE_ENV === 'dev' ? true : false;
 
@@ -43,11 +44,11 @@ export const isDev = process.env.NODE_ENV === 'dev' ? true : false;
         };
       },
     }),
-    HealthCheck,
     UserModule,
     PestModule,
   ],
-  providers: [],
+  providers: [PrometheusService],
   exports: [JwtModule],
+  controllers: [AppController],
 })
 export class AppModule {}

@@ -1,3 +1,4 @@
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -5,6 +6,7 @@ import { ClientEntity } from '../../domain/entities/client-entity';
 import { IClientRepository } from '../../domain/service/client-repository';
 import { Client } from '../models/client.entity';
 
+@Injectable()
 export class ClientRepository implements IClientRepository {
   constructor(
     @InjectRepository(Client)

@@ -1,3 +1,4 @@
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { In, Repository } from 'typeorm';
 
@@ -5,6 +6,7 @@ import { TypePlagueEntity } from '../../domain/entities/type-plague-entity';
 import { ITypePlagueRepository } from '../../domain/service/type-plague-entity';
 import { TypePlague } from '../models/type-plague.entity';
 
+@Injectable()
 export class TypePlagueRepository implements ITypePlagueRepository {
   constructor(
     @InjectRepository(TypePlague)

@@ -1,3 +1,4 @@
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { In, Repository } from 'typeorm';
 
@@ -5,6 +6,7 @@ import { FrecuencyEntity } from '../../domain/entities/frecuency-entity';
 import { IFrecuencyRepository } from '../../domain/service/frecuency-entity';
 import { Frecuency } from '../models/frecuency.entity';
 
+@Injectable()
 export class FrecuencyRepository implements IFrecuencyRepository {
   constructor(
     @InjectRepository(Frecuency)
