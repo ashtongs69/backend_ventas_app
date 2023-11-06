@@ -4,7 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { EMicroservices, EQueue } from 'src/global';
 import { AuthGuard } from 'src/shared/guard/auth.guard';
-import { PermmissionGuard } from 'src/shared/guard/permission.guard';
+import { PermissionGuard } from 'src/shared/guard/permission.guard';
 import { RabbitMQModule } from 'src/shared/modules/RabbitMQ.module';
 
 import { GetCurrentUserUseCase } from './application/auth/GetCurrentUser';
@@ -89,7 +89,7 @@ import { EncryptService } from '../../shared/repositories/EncryptRepository';
     //UTILS
     EncryptService,
     AuthGuard,
-    PermmissionGuard,
+    PermissionGuard,
   ],
   exports: [UserRepository],
 })

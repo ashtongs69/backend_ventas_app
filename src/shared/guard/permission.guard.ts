@@ -7,7 +7,7 @@ import { PERMISSION_KEY } from '../decorators/routes-permission.decorator';
 import { ERoutesNamePermissions } from '../RoutesPermission';
 
 @Injectable()
-export class PermmissionGuard implements CanActivate {
+export class PermissionGuard implements CanActivate {
   constructor(private reflector: Reflector) {}
 
   canActivate(context: ExecutionContext): boolean {

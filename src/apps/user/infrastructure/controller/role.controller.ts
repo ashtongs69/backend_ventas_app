@@ -7,14 +7,13 @@ import {
   Patch,
   Post,
   Query,
-  UseGuards,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiParam, ApiTags } from '@nestjs/swagger';
+import { ApiParam, ApiTags } from '@nestjs/swagger';
 
-import { Permission } from 'src/shared/decorators/routes-permission.decorator';
+/* import { Permission } from 'src/shared/decorators/routes-permission.decorator';
 import { AuthGuard } from 'src/shared/guard/auth.guard';
-import { PermmissionGuard } from 'src/shared/guard/permission.guard';
-import { ERoutesNamePermissions } from 'src/shared/RoutesPermission';
+import { PermissionGuard } from 'src/shared/guard/permission.guard';
+import { ERoutesNamePermissions } from 'src/shared/RoutesPermission'; */
 
 import { RoleCreatorUseCase } from '../../application/role/RoleCreator';
 import { RoleDeleteUseCase } from '../../application/role/RoleDelete';

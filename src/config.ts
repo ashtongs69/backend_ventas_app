@@ -1,5 +1,9 @@
 import { registerAs } from '@nestjs/config';
+import * as dotenv from 'dotenv';
 import * as Joi from 'joi';
+import { DataSource } from 'typeorm';
+
+dotenv.config();
 
 export enum EEnv {
   PRODUCTION = 'prod',
@@ -8,10 +12,15 @@ export enum EEnv {
 
 export interface IEnvConfig {
   PORT: number;
-  DB_USER: string;
-  DB_PASSWORD: string;
-  DB_HOST: string;
-  DB_NAME: string;
+  TYPEORM_CONNECTION: string;
+  TYPEORM_HOST: string;
+  TYPEORM_PORT: string;
+  TYPEORM_USERNAME: string;
+  TYPEORM_PASSWORD: string;
+  TYPEORM_DATABASE: string;
+  TYPEORM_ENTITIES: string;
+  TYPEORM_MIGRATIONS: string;
+  TYPEORM_LOGGING: string;
   SECRET_WORD: string;
   EXPIRATION_TIME_ACCESS_TOKEN: string;
   EXPIRATION_TIME_REFRESH_TOKEN: string;
@@ -24,10 +33,15 @@ export interface IEnvConfig {
 
 export const joiSchemaEnv = Joi.object<IEnvConfig>({
   PORT: Joi.number().min(3000).max(5000).required(),
-  DB_HOST: Joi.string().required(),
-  DB_NAME: Joi.string().required(),
-  DB_USER: Joi.string().required(),
-  DB_PASSWORD: Joi.string().required(),
+  TYPEORM_CONNECTION: Joi.string().required(),
+  TYPEORM_HOST: Joi.string().required(),
+  TYPEORM_PORT: Joi.string().required(),
+  TYPEORM_USERNAME: Joi.string().required(),
+  TYPEORM_PASSWORD: Joi.string().required(),
+  TYPEORM_DATABASE: Joi.string().required(),
+  TYPEORM_ENTITIES: Joi.string().required(),
+  TYPEORM_MIGRATIONS: Joi.string().required(),
+  TYPEORM_LOGGING: Joi.string().required(),
   SECRET_WORD: Joi.string().required(),
   EXPIRATION_TIME_ACCESS_TOKEN: Joi.string().required(),
   EXPIRATION_TIME_REFRESH_TOKEN: Joi.string().required(),
@@ -40,10 +54,15 @@ export const joiSchemaEnv = Joi.object<IEnvConfig>({
 
 export const config = registerAs('config', () => {
   return {
-    DB_HOST: process.env.DB_HOST,
-    DB_NAME: process.env.DB_NAME,
-    DB_USER: process.env.DB_USER,
-    DB_PASSWORD: process.env.DB_PASSWORD,
+    TYPEORM_CONNECTION: process.env.TYPEORM_CONNECTION,
+    TYPEORM_HOST: process.env.TYPEORM_HOST,
+    TYPEORM_PORT: process.env.TYPEORM_PORT,
+    TYPEORM_USERNAME: process.env.TYPEORM_USERNAME,
+    TYPEORM_PASSWORD: process.env.TYPEORM_PASSWORD,
+    TYPEORM_DATABASE: process.env.TYPEORM_DATABASE,
+    TYPEORM_ENTITIES: process.env.TYPEORM_ENTITIES,
+    TYPEORM_MIGRATIONS: process.env.TYPEORM_MIGRATIONS,
+    TYPEORM_LOGGING: process.env.TYPEORM_LOGGING,
     PORT: parseInt(process.env.PORT),
     SECRET_WORD: process.env.SECRET_WORD,
     EXPIRATION_TIME_ACCESS_TOKEN: process.env.EXPIRATION_TIME_ACCESS_TOKEN,
@@ -54,4 +73,16 @@ export const config = registerAs('config', () => {
     TZ: process.env.TZ,
     CORS: process.env.CORS,
   };
+});
+
+export const datasource = new DataSource({
+  type: 'postgres',
+  host: `${process.env.TYPEORM_HOST}`,
+  port: Number(process.env.TYPEORM_PORT),
+  username: `${process.env.TYPEORM_USERNAME}`,
+  password: `${process.env.TYPEORM_PASSWORD}`,
+  database: `${process.env.TYPEORM_DATABASE}`,
+  entities: [__dirname + `${process.env.TYPEORM_ENTITIES}`],
+  migrations: [__dirname + `${process.env.TYPEORM_MIGRATIONS}`],
+  synchronize: false,
 });

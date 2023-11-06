@@ -1,16 +1,17 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
-import * as client from 'prom-client';
+import { Registry, collectDefaultMetrics } from 'prom-client';
 
 @Injectable()
 export class PrometheusService implements OnModuleInit {
-  onModuleInit(): void {
-    const { collectDefaultMetrics } = client;
+  private registry: Registry;
 
-    const register = new client.Registry();
-    collectDefaultMetrics({ register: register });
+  onModuleInit(): void {
+    const registry = new Registry();
+    this.registry = registry;
+    collectDefaultMetrics({ register: registry });
   }
 
   getMetrics(): Promise<string> {
-    return client.register.metrics();
+    return this.registry.metrics();
   }
 }

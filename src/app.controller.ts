@@ -17,6 +17,7 @@ export class AppController {
   @Get('/metrics')
   async getMetrics(@Res() res: Response): Promise<void> {
     const metrics = await this.prometheusService.getMetrics();
+    res.set('Content-Type', 'text/plain; version=0.0.4; charset=utf-8');
     res.send(metrics);
   }
 }
