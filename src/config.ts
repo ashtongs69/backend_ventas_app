@@ -18,8 +18,6 @@ export interface IEnvConfig {
   TYPEORM_USERNAME: string;
   TYPEORM_PASSWORD: string;
   TYPEORM_DATABASE: string;
-  TYPEORM_ENTITIES: string;
-  TYPEORM_MIGRATIONS: string;
   TYPEORM_LOGGING: string;
   SECRET_WORD: string;
   EXPIRATION_TIME_ACCESS_TOKEN: string;
@@ -39,8 +37,6 @@ export const joiSchemaEnv = Joi.object<IEnvConfig>({
   TYPEORM_USERNAME: Joi.string().required(),
   TYPEORM_PASSWORD: Joi.string().required(),
   TYPEORM_DATABASE: Joi.string().required(),
-  TYPEORM_ENTITIES: Joi.string().required(),
-  TYPEORM_MIGRATIONS: Joi.string().required(),
   TYPEORM_LOGGING: Joi.string().required(),
   SECRET_WORD: Joi.string().required(),
   EXPIRATION_TIME_ACCESS_TOKEN: Joi.string().required(),
@@ -60,8 +56,6 @@ export const config = registerAs('config', () => {
     TYPEORM_USERNAME: process.env.TYPEORM_USERNAME,
     TYPEORM_PASSWORD: process.env.TYPEORM_PASSWORD,
     TYPEORM_DATABASE: process.env.TYPEORM_DATABASE,
-    TYPEORM_ENTITIES: process.env.TYPEORM_ENTITIES,
-    TYPEORM_MIGRATIONS: process.env.TYPEORM_MIGRATIONS,
     TYPEORM_LOGGING: process.env.TYPEORM_LOGGING,
     PORT: parseInt(process.env.PORT),
     SECRET_WORD: process.env.SECRET_WORD,
@@ -82,7 +76,7 @@ export const datasource = new DataSource({
   username: `${process.env.TYPEORM_USERNAME}`,
   password: `${process.env.TYPEORM_PASSWORD}`,
   database: `${process.env.TYPEORM_DATABASE}`,
-  entities: [__dirname + `${process.env.TYPEORM_ENTITIES}`],
-  migrations: [__dirname + `${process.env.TYPEORM_MIGRATIONS}`],
+  entities: ['dist/**/*.entity{.ts,.js}'],
+  migrations: ['dist/migrations/*{.ts,.js}'],
   synchronize: false,
 });

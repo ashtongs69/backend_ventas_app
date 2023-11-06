@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 
 import { IUseCase } from 'src/global';
-import { EncryptService } from 'src/shared/repositories/EncryptRepository';
+import { EncryptService } from 'src/shared/modules/encrypt.service';
 import { generateUUID } from 'src/shared/utils/generateUUID';
 
 import { UserEntity } from '../../domain/entity/UserEntity';

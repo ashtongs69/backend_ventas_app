@@ -8,7 +8,7 @@ import { JwtService } from '@nestjs/jwt';
 
 import { IEnvConfig } from 'src/config';
 import { IUseCase } from 'src/global';
-import { EncryptService } from 'src/shared/repositories/EncryptRepository';
+import { EncryptService } from 'src/shared/modules/encrypt.service';
 
 import { LoginUserDTO } from '../../infrastructure/dto/auth.dto';
 import { UserRepository } from '../../infrastructure/repository/user.repository';

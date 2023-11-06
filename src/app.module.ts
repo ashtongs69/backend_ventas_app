@@ -32,14 +32,15 @@ import { PrometheusService } from './shared/prom-client.service';
       useFactory: async (config: IEnvConfig) => {
         return {
           type: 'postgres',
-          host: config.TYPEORM_HOST,
-          port: 5432,
-          username: config.TYPEORM_USERNAME,
-          password: config.TYPEORM_PASSWORD,
-          database: config.TYPEORM_DATABASE,
-          entities: [__dirname + `${config.TYPEORM_ENTITIES}`],
-          migrations: [__dirname + `${config.TYPEORM_MIGRATIONS}`],
+          host: `${config.TYPEORM_HOST}`,
+          port: Number(config.TYPEORM_PORT),
+          username: `${config.TYPEORM_USERNAME}`,
+          password: `${config.TYPEORM_PASSWORD}`,
+          database: `${config.TYPEORM_DATABASE}`,
+          entities: ['dist/**/*.entity{.ts,.js}'],
+          migrations: ['dist/migrations/*{.ts,.js}'],
           synchronize: false,
+          autoLoadEntities: true,
         };
       },
     }),
