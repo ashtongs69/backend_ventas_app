@@ -3,6 +3,7 @@ import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 import { AppModule } from './app.module';
+import { MyLogger } from './shared/logger';
 
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule, {
@@ -13,6 +14,7 @@ async function bootstrap(): Promise<void> {
         process.env.CORS,
       ],
     },
+    logger: new MyLogger(),
   });
 
   app.useGlobalPipes(

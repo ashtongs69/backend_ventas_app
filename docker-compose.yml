@@ -1,21 +1,39 @@
-version: '3'
+version: '3.8'
 
 networks:
-  vpn:
-    driver: bridge
+  default:
+    name: CYAMAPPS
 
 services:
+  postgres:
+    image: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - ~/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=cyasam86
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=vex
+      - PGDATA=/var/lib/postgresql/data/pgdata
+
   prometheus-server:
     image: prom/prometheus
     ports:
       - 9090:9090
     volumes:
-      - ./prometheus-config.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus/:/etc/prometheus/
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --web.config.file=/etc/prometheus/web.yml
 
   grafana:
     image: grafana/grafana-oss
     container_name: grafana
     ports:
       - '3000:3000'
-#    user: 'cyasam7'
-#    volume: '$PWD/data:/var/lib/grafana'
+
+  loki:
+    image: grafana/loki
+    ports:
+      - 3100:3100
